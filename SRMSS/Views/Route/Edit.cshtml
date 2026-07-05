@@ -1,0 +1,69 @@
+﻿@model SRMSS.Models.RouteInfo
+
+@{
+    ViewData["Title"] = "Edit Route";
+}
+
+<div class="container mt-4">
+
+    <h2>Edit Route</h2>
+
+    <hr />
+
+    <form asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="RouteID" />
+
+        <div class="mb-3">
+            <label>Route Code</label>
+            <input asp-for="RouteCode" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Route Name</label>
+            <input asp-for="RouteName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Start Point</label>
+            <input asp-for="StartPoint" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>End Point</label>
+            <input asp-for="EndPoint" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Stops</label>
+            <input asp-for="Stops" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Total Distance</label>
+            <input asp-for="TotalDistance" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Assigned Bus</label>
+            <input asp-for="AssignedBus" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Assigned Driver</label>
+            <input asp-for="AssignedDriver" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Route Status</label>
+            <input asp-for="RouteStatus" class="form-control" />
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+            Update Route
+        </button>
+
+    </form>
+
+</div>

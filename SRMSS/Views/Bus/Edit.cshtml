@@ -1,0 +1,68 @@
+﻿@model SRMSS.Models.Bus
+
+@{
+    ViewData["Title"] = "Edit Bus";
+}
+
+<div class="container mt-4">
+
+    <h2>Edit Bus</h2>
+
+    <hr />
+
+    <form asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="VehicleID" />
+
+        <div class="mb-3">
+            <label>Bus Number</label>
+            <input asp-for="BusNumber" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Bus Model</label>
+            <input asp-for="BusModel" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Bus Type</label>
+            <input asp-for="BusType" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Seating Capacity</label>
+            <input asp-for="SeatingCapacity" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Mileage</label>
+            <input asp-for="Mileage" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Fuel Type</label>
+            <input asp-for="FuelType" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Purchase Date</label>
+            <input asp-for="PurchaseDate" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Maintenance Status</label>
+            <input asp-for="MaintenanceStatus" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Availability Status</label>
+            <input asp-for="AvailabilityStatus" class="form-control" />
+        </div>
+
+        <button class="btn btn-success">
+            Update Bus
+        </button>
+
+    </form>
+
+</div>

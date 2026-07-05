@@ -1,0 +1,246 @@
+﻿/* ===========================
+   BODY
+=========================== */
+
+body {
+    background: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===========================
+   LOGIN CONTAINER
+=========================== */
+
+.login-container {
+    position: absolute;
+    right: 870px;
+    top: 350px;
+    
+}
+
+/* ===========================
+   GLASS CARD
+=========================== */
+
+.glass-card {
+    width: 500px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.30);
+    color: white;
+}
+
+    /* ===========================
+   LOGO
+=========================== */
+
+    .glass-card img {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+
+    /* ===========================
+   HEADING
+=========================== */
+
+    .glass-card h2 {
+        font-weight: bold;
+        margin-bottom: 25px;
+    }
+
+/* ===========================
+   LABEL
+=========================== */
+
+label {
+    color: white;
+    font-weight: 500;
+}
+
+/* ===========================
+   INPUT
+=========================== */
+
+.form-control {
+    background: rgba(255,255,255,0.20);
+    color: white;
+    border: none;
+    height: 45px;
+}
+
+    .form-control::placeholder {
+        color: rgba(255,255,255,0.8);
+    }
+
+    .form-control:focus {
+        background: rgba(255,255,255,0.25);
+        color: white;
+        box-shadow: none;
+        border: none;
+    }
+
+/* ===========================
+   PASSWORD BUTTON
+=========================== */
+
+.input-group .btn {
+    background: rgba(255,255,255,0.20);
+    border: none;
+    color: white;
+}
+
+    .input-group .btn:hover {
+        background: rgba(255,255,255,0.30);
+        color: white;
+    }
+
+/* ===========================
+   LOGIN BUTTON
+=========================== */
+
+.btn-success {
+    height: 48px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+/* ===========================
+   REGISTER LINK
+=========================== */
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+    a:hover {
+        text-decoration: underline;
+        color: #90EE90;
+    }
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width:991px) {
+
+    .login-container {
+        right: 50px;
+    }
+
+    .glass-card {
+        width: 420px;
+    }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px) {
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .login-container {
+        position: static;
+        transform: none;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .glass-card {
+        width: 100%;
+        max-width: 380px;
+        padding: 20px;
+    }
+
+        .glass-card img {
+            width: 80px;
+        }
+
+        .glass-card h2 {
+            font-size: 26px;
+        }
+
+    .form-control,
+    .btn-success {
+        height: 48px;
+        font-size: 16px;
+    }
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media (max-width:480px) {
+
+    .glass-card {
+        max-width: 100%;
+        padding: 18px;
+    }
+
+        .glass-card h2 {
+            font-size: 22px;
+        }
+
+        .glass-card img {
+            width: 70px;
+        }
+}
+.btn-success {
+    transition: 0.3s;
+}
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(25,135,84,.45);
+    }
+.glass-card {
+    animation: fadeIn .8s ease;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (max-width:768px) {
+
+    .login-container {
+        position: static !important;
+        transform: none !important;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .glass-card {
+        width: 100%;
+        max-width: 380px;
+    }
+}

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<SRMSS.Models.User>
+
+<h2>User Management</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    Add User
+</a>
+
+<form method="get" class="row mb-3">
+
+    <div class="col-md-10">
+        <input type="text"
+               name="search"
+               class="form-control"
+               placeholder="Search Name / Username / Role" />
+    </div>
+
+    <div class="col-md-2">
+        <button class="btn btn-success w-100">
+            Search
+        </button>
+    </div>
+
+</form>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Created Date</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.UserID</td>
+                <td>@item.FullName</td>
+                <td>@item.Username</td>
+                <td>@item.Role</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Email</td>
+                <td>@item.Status</td>
+                <td>@item.CreatedDate.ToShortDateString()</td>
+
+                <td>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@item.UserID"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.UserID"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

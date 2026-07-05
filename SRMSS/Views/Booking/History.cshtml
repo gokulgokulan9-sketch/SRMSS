@@ -1,0 +1,132 @@
+﻿@model IEnumerable<SRMSS.Models.Booking>
+
+@{
+    ViewData["Title"] = "Booking History";
+    var routes = ViewBag.Routes as List<SRMSS.Models.RouteInfo>;
+}
+
+<h2 class="mb-3">
+    🎫 Booking History
+</h2>
+
+@{
+    var summary = ViewBag.BusSummary;
+}
+
+<div class="row mb-4">
+
+    @foreach (var item in summary)
+    {
+        <div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+
+            <div class="card border-primary shadow">
+
+                <div class="card-header bg-primary text-white p-2 text-center">
+
+                    <b>@item.BusNumber</b>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p><b>Route ID :</b> @item.RouteCode</p>
+
+                    <p><b>Route :</b> @item.RouteName</p>
+
+                    <p><b>Total Seats :</b> @item.TotalSeats</p>
+
+                    <p class="text-success">
+                        <b>Booked :</b> @item.BookedSeats
+                    </p>
+
+                    <p class="text-danger">
+                        <b>Available :</b> @item.AvailableSeats
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>ID</th>
+            <th>Passenger</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Route Code</th>
+            <th>Route Name</th>
+            <th>Bus</th>
+            <th>Seat</th>
+            <th>Journey Date</th>
+            <th>Price</th>
+            <th>Status</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.BookingID</td>
+
+                <td>@item.PassengerName</td>
+
+                <td>@item.PassengerPhone</td>
+
+                <td>@item.PassengerEmail</td>
+
+                <td>@item.RouteCode</td>
+
+                
+
+                <td>
+                    @routes.FirstOrDefault(r => r.RouteCode == item.RouteCode)?.RouteName
+                </td>
+
+                <td>@item.BusNumber</td>
+
+                <td>@item.SeatNumber</td>
+
+                <td>@item.JourneyDate.ToString("dd/MM/yyyy")</td>
+
+                <td>
+                    Rs. @item.TicketPrice
+                </td>
+
+                <td>
+
+                    @if (item.BookingStatus == "Booked")
+                    {
+                        <span class="badge bg-success">
+                            Booked
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            Cancelled
+                        </span>
+                    }
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

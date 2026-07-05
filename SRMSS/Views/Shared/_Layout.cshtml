@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+
+@using SRMSS.Data
+@inject ApplicationDbContext _context
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SRMSS</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          rel="stylesheet">
+
+   
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="logo">
+                <i class="fas fa-bus"></i>
+                <div>
+                    <h5>SRMSS</h5>
+                    <small>Smart Route System</small>
+                </div>
+            </div>
+
+            <ul>
+
+                <li>
+                    <a href="/Dashboard/Index">
+                        <i class="fas fa-chart-pie"></i>
+                        Dashboard
+                    </a>
+                </li>
+
+
+                <li>
+                    <a asp-controller="Booking" asp-action="Index">
+                        <i class="fas fa-ticket-alt"></i>
+                        Booking
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Booking" asp-action="History">
+                        <i class="fas fa-history"></i>
+                        Booking History
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Bus" asp-action="Index">
+                        <i class="fas fa-bus"></i>
+                        Bus Management
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Driver" asp-action="Index">
+                        <i class="fas fa-user-tie"></i>
+                        Driver Management
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Route" asp-action="Index">
+                        <i class="fas fa-route"></i>
+                        Route Management
+                    </a>
+                </li>
+                
+
+
+                
+
+                <li>
+                    <a asp-controller="Schedule" asp-action="Index">
+                        <i class="fas fa-calendar-alt"></i> Schedule Management
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Fuel" asp-action="Index">
+                        <i class="fas fa-gas-pump"></i> Fuel Management
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Maintenance" asp-action="Index">
+                        <i class="fas fa-cogs"></i> Maintenance
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="User" asp-action="Index">
+                        <i class="fas fa-users"></i> User Management
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Tracking" asp-action="Index">
+                        <i class="fas fa-location-dot"></i>
+                        Live Vehicle Location
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Report" asp-action="Index">
+                        <i class="fas fa-chart-bar"></i>
+                        Reports
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Settings"
+                       asp-action="Index">
+
+                        <i class="fas fa-cogs"></i>
+
+                        System Settings
+
+                    </a>
+                </li>
+
+               
+                <li>
+                    <a asp-controller="Login" asp-action="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+               
+
+
+            </ul>
+
+        </div>
+
+        <!-- MAIN --> <div class="main-content">
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+            <div>
+                <h4 class="m-0">
+                    Smart Route Management and Scheduling System
+                </h4>
+            </div>
+
+            <div class="top-right">
+
+                <form asp-controller="Search"
+                      asp-action="Index"
+                      method="get"
+                      class="d-flex">
+
+                    <input type="text"
+                           name="keyword"
+                           class="form-control search-box"
+                           placeholder="Search Bus No, Route, Driver..."
+                           required />
+
+                    <button type="submit"
+                            class="btn btn-success ms-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+
+                </form>
+
+                <!-- Notification -->
+                <a asp-controller="Notification"
+                   asp-action="Index"
+                   class="notification position-relative me-3">
+
+                    <i class="fas fa-bell"></i>
+
+                    @{
+                        var unreadCount = _context.Activities.Count(x => !x.IsRead);
+                    }
+
+                    @if (unreadCount > 0)
+                    {
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            @unreadCount
+                        </span>
+                    }
+
+                </a>
+
+               <!-- User Profile -->
+                <div class="dropdown">
+
+                    <a class="user-profile text-decoration-none dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("ProfileImage")))
+                        {
+                            <img src="~/upload/profiles/@Context.Session.GetString("ProfileImage")"
+                                 style="width:45px;
+                            height:45px;
+                            border-radius:50%;
+                            object-fit:cover;
+                            border:2px solid white;" />
+                        }
+                        else
+                        {
+                            <i class="fas fa-user-circle profile-icon"></i>
+                        }
+
+                        <div class="user-info">
+                            <div class="user-name">
+                                @Context.Session.GetString("FullName")
+                            </div>
+
+                            <div class="user-role">
+                                @Context.Session.GetString("Role")
+                            </div>
+                        </div>
+
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+
+                        <li>
+                            <a class="dropdown-item"
+                               asp-controller="Profile"
+                               asp-action="Index">
+
+                                <i class="fas fa-user me-2"></i>
+                                My Profile
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               asp-controller="Profile"
+                               asp-action="Edit">
+
+                                <i class="fas fa-user-edit me-2"></i>
+                                Edit Profile
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               asp-controller="Profile"
+                               asp-action="ChangePassword">
+
+                                <i class="fas fa-key me-2"></i>
+                                Change Password
+
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item text-danger"
+                               asp-controller="Login"
+                               asp-action="Logout">
+
+                                <i class="fas fa-sign-out-alt me-2"></i>
+                                Logout
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+   
+
+                
+
+            </div>
+
+        </div>
+
+        <div class="content-area">
+            @RenderBody()
+        </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

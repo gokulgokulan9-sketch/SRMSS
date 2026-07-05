@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SRMSS.Models.MaintenanceLog>
+
+<h2>Maintenance Management</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    Add Maintenance
+</a>
+
+<form asp-action="Index" method="get" class="row mb-3">
+
+    <div class="col-md-10">
+        <input type="text"
+               name="search"
+               class="form-control"
+               placeholder="Search Bus / Mechanic / Type" />
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">
+            Search
+        </button>
+    </div>
+
+
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Bus Number</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Cost</th>
+            <th>Mechanic</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaintenanceID</td>
+                <td>@item.BusNumber</td>
+                <td>@item.MaintenanceDate.ToShortDateString()</td>
+                <td>@item.MaintenanceType</td>
+                <td>@item.ServiceCost</td>
+                <td>@item.MechanicName</td>
+                <td>@item.Status</td>
+
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@item.MaintenanceID"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.MaintenanceID"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

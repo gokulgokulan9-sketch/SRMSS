@@ -1,0 +1,192 @@
+﻿@model SRMSS.Models.Booking
+
+@{
+    ViewData["Title"] = "Book Seats";
+
+    var route = ViewBag.Route as SRMSS.Models.RouteInfo;
+
+    List<int> seats = ViewBag.SelectedSeats as List<int>;
+
+    decimal total = (decimal)ViewBag.TotalAmount;
+}
+
+<div class="container mt-4">
+
+    <div class="row">
+
+        <!-- Passenger Details -->
+
+        <div class="col-md-7">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3>Passenger Information</h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="Book" method="post">
+
+                        <input asp-for="RouteCode" type="hidden" />
+                        <input asp-for="BusNumber" type="hidden" />
+                        <input asp-for="TicketPrice" type="hidden" />
+
+                        <!-- Selected Seats -->
+                        <input type="hidden"
+                               name="seatNos"
+                               value="@string.Join(",", seats)" />
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Passenger Name
+                            </label>
+
+                            <input asp-for="PassengerName"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Phone Number
+                            </label>
+
+                            <input asp-for="PassengerPhone"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            <input asp-for="PassengerEmail"
+                                   type="email"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Journey Date
+                            </label>
+
+                            <input asp-for="JourneyDate"
+                                   type="date"
+                                   class="form-control"
+                                   value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-success">
+
+                            Confirm Booking
+
+                        </button>
+
+                        <a asp-action="Seat"
+                           asp-route-id="@route.RouteID"
+                           class="btn btn-secondary">
+
+                            Cancel
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Booking Summary -->
+
+        <div class="col-md-5">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-success text-white">
+
+                    <h3>Booking Summary</h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th>Route</th>
+                            <td>@route.RouteCode</td>
+                        </tr>
+
+                        <tr>
+                            <th>Route Name</th>
+                            <td>@route.RouteName</td>
+                        </tr>
+
+                        <tr>
+                            <th>Bus Number</th>
+                            <td>@route.AssignedBus</td>
+                        </tr>
+
+                        <tr>
+                            <th>Selected Seats</th>
+                            <td>
+
+                                @foreach (var seat in seats)
+                                {
+                                    <span class="badge bg-primary me-1">
+                                        @seat
+                                    </span>
+                                }
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>No. of Seats</th>
+                            <td>@seats.Count</td>
+                        </tr>
+
+                        <tr>
+                            <th>Ticket Price</th>
+                            <td>
+                                Rs. @route.TicketPrice
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Total Amount</th>
+                            <td class="text-danger">
+
+                                <h4>
+                                    Rs. @total
+                                </h4>
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

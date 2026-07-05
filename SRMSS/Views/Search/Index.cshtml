@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2 class="mb-4">Search Results</h2>
+
+@if (ViewBag.Buses != null && ViewBag.Buses.Count > 0)
+{
+    <h4>🚌 Buses</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Bus Number</th>
+                <th>Bus Model</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bus in ViewBag.Buses)
+            {
+                <tr>
+                    <td>@bus.BusNumber</td>
+                    <td>@bus.BusModel</td>
+                    <td>@bus.AvailabilityStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (ViewBag.Routes != null && ViewBag.Routes.Count > 0)
+{
+    <h4 class="mt-4">🛣 Routes</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Route</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var route in ViewBag.Routes)
+            {
+                <tr>
+                    <td>@route.RouteName</td>
+                    <td>@route.StartPoint</td>
+                    <td>@route.EndPoint</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (ViewBag.Drivers != null && ViewBag.Drivers.Count > 0)
+{
+    <h4 class="mt-4">👨‍✈️ Drivers</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Assigned Route</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var driver in ViewBag.Drivers)
+            {
+                <tr>
+                    <td>@driver.DriverName</td>
+                    <td>@driver.AssignedRoute</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if ((ViewBag.Buses == null || ViewBag.Buses.Count == 0) &&
+     (ViewBag.Routes == null || ViewBag.Routes.Count == 0) &&
+     (ViewBag.Drivers == null || ViewBag.Drivers.Count == 0))
+{
+    <div class="alert alert-warning">
+        No results found.
+    </div>
+}

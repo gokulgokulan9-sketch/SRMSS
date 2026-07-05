@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container mt-5 text-center">
+
+    <i class="fas fa-lock text-danger"
+       style="font-size:100px"></i>
+
+    <h1 class="text-danger mt-4">
+        ACCESS DENIED
+    </h1>
+
+    <h4>
+        You do not have permission to access this page.
+    </h4>
+
+    <br />
+
+    <a asp-controller="Dashboard"
+       asp-action="Index"
+       class="btn btn-primary">
+
+        Back to Dashboard
+
+    </a>
+
+</div>

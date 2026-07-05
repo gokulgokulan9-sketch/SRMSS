@@ -1,0 +1,35 @@
+﻿@model SRMSS.Models.FuelLog
+
+<h3 class="text-danger">Delete Fuel Log</h3>
+
+<hr />
+
+<dl class="row">
+
+    <dt class="col-sm-3">Bus Number</dt>
+    <dd class="col-sm-9">@Model.BusNumber</dd>
+
+    <dt class="col-sm-3">Route Code</dt>
+    <dd class="col-sm-9">@Model.RouteCode</dd>
+
+    <dt class="col-sm-3">Fuel Quantity</dt>
+    <dd class="col-sm-9">@Model.FuelQuantity</dd>
+
+    <dt class="col-sm-3">Fuel Cost</dt>
+    <dd class="col-sm-9">@Model.FuelCost</dd>
+
+</dl>
+
+<form asp-action="Delete">
+
+    <input type="hidden" asp-for="FuelLogID" />
+
+    <button class="btn btn-danger">
+        Delete
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<SRMSS.Models.RouteInfo>
+
+@{
+    ViewData["Title"] = "Bus Booking";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center text-primary mb-4">
+        🚌 Bus Ticket Booking
+    </h2>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+
+                <div class="card shadow h-100">
+
+                    <div class="card-header bg-primary text-white">
+
+                        <h5>
+                            @item.RouteCode
+                        </h5>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <table class="table table-borderless">
+
+                            <tr>
+                                <td><b>Bus</b></td>
+                                <td>@item.AssignedBus</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Route</b></td>
+                                <td>@item.RouteName</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>From</b></td>
+                                <td>@item.StartPoint</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>To</b></td>
+                                <td>@item.EndPoint</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Departure</b></td>
+                                <td>@item.DepartureTime</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Arrival</b></td>
+                                <td>@item.ArrivalTime</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Total Seats</b></td>
+                                <td>@item.TotalSeats</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Ticket Price</b></td>
+                                <td class="text-success">
+                                    <b>Rs. @item.TicketPrice</b>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                    <div class="card-footer text-center">
+
+                        <a asp-action="Seat"
+                           asp-route-id="@item.RouteID"
+                           class="btn btn-success w-100">
+
+                            Select Seat
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

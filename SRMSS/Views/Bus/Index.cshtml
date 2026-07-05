@@ -1,0 +1,99 @@
+﻿@model IEnumerable<SRMSS.Models.Bus>
+
+@{
+    ViewData["Title"] = "Bus Management";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center">
+        Bus Management
+    </h2>
+
+    <hr />
+    <form method="get">
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+                <input type="text"
+                       name="search"
+                       class="form-control"
+                       placeholder="Search Bus..." />
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit"
+                        class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    <a href="/Bus/Create" class="btn btn-primary mb-3">
+        Add New Bus
+    </a>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>Bus Number</th>
+                <th>Bus Model</th>
+                <th>Bus Type</th>
+                <th>Seating Capacity</th>
+                <th>Mileage</th>
+                <th>Fuel Type</th>
+                <th>Purchase Date</th>
+                <th>Maintenance Status</th>
+                <th>Availability</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.BusNumber</td>
+                    <td>@item.BusModel</td>
+                    <td>@item.BusType</td>
+                    <td>@item.SeatingCapacity</td>
+                    <td>@item.Mileage</td>
+                    <td>@item.FuelType</td>
+                    <td>@item.PurchaseDate</td>
+                    <td>@item.MaintenanceStatus</td>
+                    <td>@item.AvailabilityStatus</td>
+
+                    <td>
+                        <a href="/Bus/Edit/@item.VehicleID"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+                        <a href="/Bus/Delete/@item.VehicleID"
+                           class="btn btn-danger btn-sm"
+                        onclick="return confirm('Are you sure want to Delete this Bus');">
+                            Delete
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <div class="mt-3">
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="/Bus?page=@i"
+               class="btn btn-primary btn-sm">
+                @i
+            </a>
+        }
+
+    </div>
+
+</div>

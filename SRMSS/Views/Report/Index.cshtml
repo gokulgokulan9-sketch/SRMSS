@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+}
+
+<h2 class="mb-4">Reports Dashboard</h2>
+
+<div class="mb-4">
+    <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown">
+            <i class="fas fa-download"></i> Download Reports
+        </button>
+
+        <ul class="dropdown-menu">
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Report"
+                   asp-action="BusReport">
+                    Bus Management
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Report"
+                   asp-action="DriverReport">
+                    Driver Management
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Report"
+                   asp-action="RouteReport">
+                    Route Management
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Report"
+                   asp-action="ScheduleReport">
+                    Schedule Management
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Report"
+                   asp-action="FuelReport">
+                    Fuel Management
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Report"
+                   asp-action="MaintenanceReport">
+                    Maintenance Management
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-controller="Report"
+                   asp-action="UserReport">
+                    User Management
+                </a>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+                <a class="dropdown-item text-primary"
+                   asp-controller="Report"
+                   asp-action="AllReports">
+                    All Reports
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5>Total Buses</h5>
+                <h2>@ViewBag.TotalBuses</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5>Total Drivers</h5>
+                <h2>@ViewBag.TotalDrivers</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-warning text-dark">
+            <div class="card-body">
+                <h5>Total Routes</h5>
+                <h2>@ViewBag.TotalRoutes</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5>Total Schedules</h5>
+                <h2>@ViewBag.TotalSchedules</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5>Fuel Records</h5>
+                <h2>@ViewBag.TotalFuelLogs</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body">
+                <h5>Maintenance Records</h5>
+                <h2>@ViewBag.TotalMaintenanceLogs</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <h5>Total Users</h5>
+                <h2>@ViewBag.TotalUsers</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="card">
+
+            <div class="card-header bg-success text-white">
+                Fuel Report
+            </div>
+
+            <div class="card-body">
+
+                <h5>Total Fuel Cost</h5>
+
+                <h3>
+                    Rs. @ViewBag.TotalFuelCost
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card">
+
+            <div class="card-header bg-danger text-white">
+                Maintenance Report
+            </div>
+
+            <div class="card-body">
+
+                <h5>Total Maintenance Cost</h5>
+
+                <h3>
+                    Rs. @ViewBag.TotalMaintenanceCost
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

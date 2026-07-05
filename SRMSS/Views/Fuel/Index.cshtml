@@ -1,0 +1,95 @@
+﻿@model IEnumerable<SRMSS.Models.FuelLog>
+
+@{
+    ViewData["Title"] = "Fuel Management";
+}
+
+<div class="card shadow">
+
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h3>⛽ Fuel Management</h3>
+
+        <a asp-action="Create" class="btn btn-light">
+            ➕ Add Fuel Log
+        </a>
+    </div>
+
+    <div class="card-body">
+
+        <!-- Search -->
+        <form asp-action="Index" method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text"
+                       name="searchString"
+                       class="form-control"
+                       placeholder="Search Bus / Route / Recorded By" />
+
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-hover text-center">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Bus Number</th>
+                    <th>Route Code</th>
+                    <th>Date</th>
+                    <th>Fuel Qty</th>
+                    <th>Fuel Cost</th>
+                    <th>Odometer</th>
+                    <th>Fuel Station</th>
+                    <th>Recorded By</th>
+                    <th>Remarks</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.FuelLogID</td>
+                        <td>@item.BusNumber</td>
+                        <td>@item.RouteCode</td>
+                        <td>@item.FuelDate.ToShortDateString()</td>
+                        <td>@item.FuelQuantity</td>
+                        <td>@item.FuelCost</td>
+                        <td>@item.OdometerReading</td>
+                        <td>@item.FuelStation</td>
+                        <td>@item.RecordedBy</td>
+                        <td>@item.Remarks</td>
+
+                        <td>
+
+                           
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.FuelLogID"
+                               class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.FuelLogID"
+                               class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

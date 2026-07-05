@@ -1,0 +1,147 @@
+﻿@model SRMSS.Models.Booking
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Booking Successful";
+
+    List<int> seats = ViewBag.AllSeats as List<int> ?? new List<int>();
+
+    decimal total = (decimal)ViewBag.TotalAmount;
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body text-center">
+
+            <h2 class="text-success">
+
+                ✅ Booking Successful
+
+            </h2>
+
+            <p>
+
+                Your bus ticket has been booked successfully.
+
+            </p>
+
+            <hr />
+
+            <table class="table table-bordered w-50 mx-auto">
+
+                <tr>
+                    <th>Booking ID</th>
+                    <td>@Model.BookingID</td>
+                </tr>
+
+                <tr>
+                    <th>Passenger</th>
+                    <td>@Model.PassengerName</td>
+                </tr>
+
+                <tr>
+                    <th>Route Code</th>
+                    <td>@Model.RouteCode</td>
+                </tr>
+
+                <tr>
+                    <th>Route</th>
+                    <td>@ViewBag.RouteName</td>
+                </tr>
+
+                <tr>
+                    <th>Bus</th>
+                    <td>@Model.BusNumber</td>
+                </tr>
+
+                <tr>
+                    <th>Journey Date</th>
+                    <td>@Model.JourneyDate.ToString("dd/MM/yyyy")</td>
+                </tr>
+
+                <tr>
+                    <th>Seats</th>
+                    <td>
+
+                        @foreach (var seat in seats)
+                        {
+                            <span class="badge bg-primary me-1">
+                                @seat
+                            </span>
+                        }
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>No. of Seats</th>
+                    <td>@seats.Count</td>
+                </tr>
+
+                <tr>
+                    <th>Total Amount</th>
+                    <td class="text-danger">
+
+                        <h4>
+
+                            Rs. @total
+
+                        </h4>
+
+                    </td>
+                </tr>
+
+            </table>
+
+            <br />
+
+            <div class="alert alert-info">
+
+                <b>Need another copy?</b>
+
+                You can download your ticket anytime
+                or send it again to your email.
+
+            </div>
+
+            <a asp-controller="Ticket"
+               asp-action="SendTicketEmail"
+               asp-route-id="@Model.BookingID"
+               class="btn btn-primary">
+
+                <i class="fa fa-envelope"></i>
+                Send Ticket to Email
+
+            </a>
+
+            <a asp-controller="Ticket"
+               asp-action="Download"
+               asp-route-id="@Model.BookingID"
+               class="btn btn-success">
+
+                📄 Download E-Ticket
+
+            </a>
+
+
+            <a asp-action="Index"
+               class="btn btn-primary">
+
+                🚌 Book Another Ticket
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,87 @@
+﻿@model SRMSS.Models.MaintenanceLog
+
+@{
+    ViewData["Title"] = "Delete Maintenance";
+}
+
+<div class="card shadow">
+    <div class="card-header bg-danger text-white">
+        <h4>Delete Maintenance Record</h4>
+    </div>
+
+    <div class="card-body">
+
+        <h5 class="text-danger mb-4">
+            Are you sure you want to delete this record?
+        </h5>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Maintenance ID</th>
+                <td>@Model.MaintenanceID</td>
+            </tr>
+
+            <tr>
+                <th>Bus Number</th>
+                <td>@Model.BusNumber</td>
+            </tr>
+
+            <tr>
+                <th>Maintenance Date</th>
+                <td>@Model.MaintenanceDate.ToShortDateString()</td>
+            </tr>
+
+            <tr>
+                <th>Maintenance Type</th>
+                <td>@Model.MaintenanceType</td>
+            </tr>
+
+            <tr>
+                <th>Description</th>
+                <td>@Model.Description</td>
+            </tr>
+
+            <tr>
+                <th>Service Cost</th>
+                <td>@Model.ServiceCost</td>
+            </tr>
+
+            <tr>
+                <th>Next Service Date</th>
+                <td>@Model.NextServiceDate.ToShortDateString()</td>
+            </tr>
+
+            <tr>
+                <th>Mechanic Name</th>
+                <td>@Model.MechanicName</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+                <td>@Model.Status</td>
+            </tr>
+
+            <tr>
+                <th>Remarks</th>
+                <td>@Model.Remarks</td>
+            </tr>
+
+        </table>
+
+        <form asp-action="Delete">
+
+            <input type="hidden" asp-for="MaintenanceID" />
+
+            <button type="submit" class="btn btn-danger">
+                Confirm Delete
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+</div>

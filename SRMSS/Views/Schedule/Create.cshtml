@@ -1,0 +1,101 @@
+﻿@model SRMSS.Models.RouteInfo
+
+@{
+    ViewData["Title"] = "Add Route";
+}
+
+<h2>Add Route</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+
+        <form asp-action="Create">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RouteCode"></label>
+                    <input asp-for="RouteCode" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RouteName"></label>
+                    <input asp-for="RouteName" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="StartPoint"></label>
+                    <input asp-for="StartPoint" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EndPoint"></label>
+                    <input asp-for="EndPoint" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Stops"></label>
+                    <input asp-for="Stops" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="TotalDistance"></label>
+                    <input asp-for="TotalDistance" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="AssignedBus"></label>
+                    <input asp-for="AssignedBus" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="AssignedDriver"></label>
+                    <input asp-for="AssignedDriver" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="DepartureTime"></label>
+                    <input asp-for="DepartureTime" type="time" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ArrivalTime"></label>
+                    <input asp-for="ArrivalTime" type="time" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="TotalSeats"></label>
+                    <input asp-for="TotalSeats" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="TicketPrice"></label>
+                    <input asp-for="TicketPrice" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RouteStatus"></label>
+                    <select asp-for="RouteStatus" class="form-control">
+                        <option>Active</option>
+                        <option>Inactive</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Save Route
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                Back
+            </a>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "Live Tracking";
+}
+
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<div class="card shadow">
+    <div class="card-header bg-success text-white">
+        <h4>Live Bus Tracking</h4>
+    </div>
+
+    <div class="card-body">
+        <div id="map" style="height:600px;"></div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+    // Create Map
+    var map = L.map('map').setView([7.8731, 80.7718], 7);
+
+    // OpenStreetMap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    // Store Markers
+    var markers = [];
+
+    function loadBuses() {
+
+    // Remove old markers
+    markers.forEach(marker => map.removeLayer(marker));
+    markers = [];
+
+    fetch('/Tracking/GetVehicleLocations')
+    .then(response => response.json())
+    .then(data => {
+
+    data.forEach(bus => {
+
+    let iconColor = "blue";
+
+    if (bus.availabilityStatus === "Available")
+    iconColor = "green";
+
+    else if (bus.availabilityStatus === "Assigned")
+    iconColor = "orange";
+
+    else if (bus.availabilityStatus === "Maintenance")
+    iconColor = "red";
+
+    let busIcon = L.icon({
+    iconUrl:
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-' +
+    iconColor + '.png',
+
+    shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34]
+    });
+
+    let marker = L.marker(
+    [bus.latitude, bus.longitude],
+    { icon: busIcon })
+    .addTo(map)
+    .bindPopup(
+    "<b>Bus Number :</b> " + bus.busNumber +
+    "<br><b>Model :</b> " + bus.busModel +
+    "<br><b>Driver :</b> " + bus.driverName +
+    "<br><b>Route :</b> " + bus.routeName +
+   
+    "<br><b>Status :</b> " + bus.availabilityStatus +
+    "<br><b>Latitude :</b> " + bus.latitude +
+    "<br><b>Longitude :</b> " + bus.longitude
+    );
+
+    markers.push(marker);
+
+    });
+
+    });
+    }
+
+    // First Load
+    loadBuses();
+
+    // Refresh Every 5 Seconds
+    setInterval(loadBuses, 5000);
+
+</script>
+

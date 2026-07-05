@@ -1,0 +1,418 @@
+﻿@{
+    ViewData["Title"] = "Select Seats";
+
+    var route = ViewBag.Route as SRMSS.Models.RouteInfo;
+
+    List<int> bookedSeats = ViewBag.BookedSeats as List<int> ?? new List<int>();
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center text-primary mb-4">
+        🚌 Select Your Seats
+    </h2>
+
+    <div class="row">
+
+        <!-- Seat Layout -->
+
+        <div class="col-md-8">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h4>@route.RouteName</h4>
+
+                    <p class="mb-0">
+
+                        @route.StartPoint
+
+                        →
+
+                        @route.EndPoint
+
+                    </p>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="Book"
+                          method="get">
+
+                        <input type="hidden"
+                               name="id"
+                               value="@route.RouteID" />
+
+                        <div class="text-end mb-4">
+
+                            <button class="btn btn-dark">
+
+                                DRIVER
+
+                            </button>
+
+                        </div>
+
+                        <div class="seat-container">
+
+                            @{
+                                int seat = 1;
+
+                                for (int row = 1; row <= 10; row++)
+                                {
+                                    <div class="seat-row">
+
+                                        @for (int col = 1; col <= 4; col++)
+                                        {
+                                            bool booked = bookedSeats.Contains(seat);
+
+                                            if (booked)
+                                            {
+                                                <div class="seat booked">
+
+                                                    @seat
+
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="seat available"
+                                                     data-seat="@seat">
+
+                                                    @seat
+
+                                                </div>
+                                            }
+
+                                            if (col == 2)
+                                            {
+                                                <div class="aisle"></div>
+                                            }
+
+                                            seat++;
+                                        }
+
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <input type="hidden"
+                               id="SelectedSeats"
+                               name="seatNos" />
+                        
+                        <style>
+
+.seat-container{
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+.seat-row{
+
+display:flex;
+
+justify-content:center;
+
+gap:10px;
+
+}
+
+.aisle{
+
+width:50px;
+
+}
+
+.seat{
+
+width:60px;
+
+height:60px;
+
+border-radius:10px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-weight:bold;
+
+cursor:pointer;
+
+border:2px solid gray;
+
+user-select:none;
+
+}
+
+.available{
+
+background:white;
+
+}
+
+.booked{
+
+background:#28a745;
+
+color:white;
+
+cursor:not-allowed;
+
+}
+
+.selected{
+
+background:#0d6efd;
+
+color:white;
+
+}
+
+</style>
+
+
+                        <button type="submit"
+                                class="btn btn-primary btn-lg w-100">
+
+                            Continue Booking
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Legend -->
+
+        <div class="col-md-4">
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show">
+
+                    <strong>✔ Success!</strong>
+
+                    @TempData["Success"]
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+            }
+
+            <div class="card shadow">
+
+                <div class="card-header bg-info text-white">
+
+                    Seat Information
+
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+
+                        🟩
+                        Already Booked
+
+                    </p>
+
+                    <p>
+
+                        ⬜
+                        Available
+
+                    </p>
+
+                    <p>
+
+                        🔵
+                        Selected
+
+                    </p>
+
+                    <hr />
+
+                    <table class="table">
+
+                        <tr>
+
+                            <td>Route</td>
+
+                            <td>@route.RouteCode</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Bus</td>
+
+                            <td>@route.AssignedBus</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Departure</td>
+
+                            <td>@route.DepartureTime</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Arrival</td>
+
+                            <td>@route.ArrivalTime</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Ticket</td>
+
+                            <td>
+
+                                <span class="text-success">
+
+                                    <b>
+
+                                        Rs. @route.TicketPrice
+
+                                    </b>
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Total Seats</td>
+
+                            <td>
+
+                                @route.TotalSeats
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    <hr>
+
+                    <h5>Selected Seats</h5>
+
+                    <div id="selectedSeats">
+                        <span class="text-muted">None</span>
+                    </div>
+
+                    <table class="table">
+
+                        <tr>
+                            <th>Seats</th>
+                            <td id="seatCount">0</td>
+                        </tr>
+
+                        <tr>
+                            <th>Total</th>
+                            <td id="totalAmount">
+                                Rs. 0
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script>
+
+        const seats=document.querySelectorAll(".available");
+
+        const hidden=document.getElementById("SelectedSeats");
+
+        const selectedDiv=document.getElementById("selectedSeats");
+
+        const seatCount=document.getElementById("seatCount");
+
+        const total=document.getElementById("totalAmount");
+
+        const price=@route.TicketPrice;
+
+        let selected=[];
+
+        seats.forEach(s=>{
+
+        s.addEventListener("click",function(){
+
+        const no=this.dataset.seat;
+
+        if(selected.includes(no))
+        {
+        selected=selected.filter(x=>x!=no);
+
+        this.classList.remove("selected");
+        }
+        else
+        {
+        selected.push(no);
+
+        this.classList.add("selected");
+        }
+
+        hidden.value=selected.join(",");
+
+        selectedDiv.innerHTML="";
+
+        selected.forEach(x=>{
+
+        selectedDiv.innerHTML+=
+        "<span class='badge bg-primary me-1'>Seat "+x+"</span>";
+
+        });
+
+        if(selected.length==0)
+        selectedDiv.innerHTML="<span class='text-muted'>None</span>";
+
+        seatCount.innerHTML=selected.length;
+
+        total.innerHTML="Rs. "+(selected.length*price);
+
+        });
+
+        });
+
+    </script>
+
+    
+
+}

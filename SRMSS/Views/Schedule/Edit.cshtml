@@ -1,0 +1,81 @@
+﻿@model SRMSS.Models.Schedule
+
+@{
+    ViewData["Title"] = "Edit Schedule";
+}
+
+<h2>Edit Schedule</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="ScheduleID" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="RouteCode" class="form-label"></label>
+                <input asp-for="RouteCode" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BusNumber" class="form-label"></label>
+                <input asp-for="BusNumber" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DriverName" class="form-label"></label>
+                <input asp-for="DriverName" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ScheduleDate" class="form-label"></label>
+                <input asp-for="ScheduleDate" type="date" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DepartureTime" class="form-label"></label>
+                <input asp-for="DepartureTime" type="time" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ArrivalTime" class="form-label"></label>
+                <input asp-for="ArrivalTime" type="time" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="TripType" class="form-label"></label>
+                <input asp-for="TripType" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="TripStatus" class="form-label"></label>
+                <input asp-for="TripStatus" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Remarks" class="form-label"></label>
+                <textarea asp-for="Remarks" class="form-control" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Update Schedule
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                Back
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

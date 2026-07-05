@@ -1,0 +1,333 @@
+﻿
+
+
+<div class="container-fluid">
+
+   
+
+    <div class="card shadow-sm border-0 mb-3">
+        <div class="card-body">
+            <h1>
+                👋 Welcome to SRMSS!
+            </h1>
+            <p class="text-muted"> Manage routes efficiently with smart scheduling.</p>
+        </div>
+    </div>
+
+    <h3 class="mb-3">🚌 Bus Overview</h3>
+
+    <div class="row g-3 mb-4">
+
+        <div class="col">
+            <div class="card bg-primary text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Total Buses</h6>
+                    <h2>@ViewBag.TotalBuses</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-success text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Available</h6>
+                    <h2>@ViewBag.Available</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-warning text-dark text-center stat-card">
+                <div class="card-body">
+                    <h6>Assigned</h6>
+                    <h2>@ViewBag.Assigned</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-danger text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Maintenance</h6>
+                    <h2>@ViewBag.Maintenance</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-info text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Total Drivers</h6>
+                    <h2>@ViewBag.TotalDrivers</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row g-3 mb-4">
+
+        <div class="col">
+            <div class="card bg-success text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Available Drivers</h6>
+                    <h2>@ViewBag.AvailableDriversCount</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-warning text-dark text-center stat-card">
+                <div class="card-body">
+                    <h6>Assigned Drivers</h6>
+                    <h2>@ViewBag.AssignedDrivers</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-danger text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>On Leave</h6>
+                    <h2>@ViewBag.OnLeaveDrivers</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-success text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Active Routes</h6>
+                    <h2>@ViewBag.ActiveRoutes</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-danger text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Inactive Routes</h6>
+                    <h2>@ViewBag.InactiveRoutes</h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card bg-primary text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Total Bookings</h6>
+                    <h2>@ViewBag.TotalBookings</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card bg-success text-white text-center stat-card">
+                <div class="card-body">
+                    <h6>Today's Bookings</h6>
+                    <h2>@ViewBag.TodayBookings</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+<div class="row mt-4">
+    <!-- Recent Activities -->
+    <div class="col-md-6">
+        <div class="card shadow" id="recentActivities">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">Recent Activities</h5>
+                
+            </div>
+
+            <div class="card-body">
+
+                @foreach (var item in ViewBag.RecentActivities)
+                {
+                    <p>
+                        @item.Message
+                        <br />
+                        <small class="text-muted">
+                            @item.ActivityDate.ToString("dd MMM yyyy hh:mm tt")
+                        </small>
+                    </p>
+                    <hr />
+                }
+
+            </div>
+        </div>
+    </div>
+    <!-- Mini Map -->
+    <div class="col-md-6">
+        <div class="card shadow h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">🗺 Live Vehicle Locations</h5>
+            </div>
+
+            <div class="card-body">
+                <div id="miniMap" style="height:350px;"></div>
+            </div>
+        </div>
+    </div>
+
+    
+
+</div>
+
+  
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    Bus Status
+                </div>
+                <div class="card-body text-center">
+                    <canvas id="busChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    Driver Status
+                </div>
+                <div class="card-body text-center">
+                    <canvas id="driverChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    Route Status
+                </div>
+                <div class="card-body text-center">
+                    <canvas id="routeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+</div>
+
+</div>
+@section Scripts {
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        new Chart(document.getElementById('busChart'),{
+        type:'doughnut',
+        data:{
+        labels:['Available','Assigned','Maintenance'],
+        datasets:[{
+        data:[
+        @ViewBag.Available,
+        @ViewBag.Assigned,
+        @ViewBag.Maintenance
+        ]
+        }]
+        }
+        });
+
+        new Chart(document.getElementById('driverChart'),{
+        type:'doughnut',
+        data:{
+        labels:['Available','Assigned','On Leave'],
+        datasets:[{
+        data:[
+        @ViewBag.AvailableDriversCount,
+        @ViewBag.AssignedDrivers,
+        @ViewBag.OnLeaveDrivers
+        ]
+        }]
+        }
+        });
+
+        new Chart(document.getElementById('routeChart'),{
+        type:'doughnut',
+        data:{
+        labels:['Active','Inactive'],
+        datasets:[{
+        data:[
+        @ViewBag.ActiveRoutes,
+        @ViewBag.InactiveRoutes
+        ]
+        }]
+        }
+        });
+
+        //MINI MAP 
+        
+        var miniMap = L.map('miniMap').setView([7.8731, 80.7718], 7);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+        }).addTo(miniMap);
+
+        fetch('/Tracking/GetVehicleLocations')
+        .then(response => response.json())
+        .then(data => {
+
+        data.forEach(bus => {
+
+        let iconColor = "blue";
+
+        if (bus.availabilityStatus === "Available")
+        iconColor = "green";
+
+        else if (bus.availabilityStatus === "Assigned")
+        iconColor = "orange";
+
+        else if (bus.availabilityStatus === "Maintenance")
+        iconColor = "red";
+
+        let busIcon = L.icon({
+        iconUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-' +
+        iconColor + '.png',
+
+        shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34]
+        });
+
+        L.marker([bus.latitude, bus.longitude], { icon: busIcon })
+        .addTo(miniMap)
+        .bindPopup(
+        "<b>Bus Number :</b> " + bus.busNumber +
+        "<br><b>Model :</b> " + bus.busModel +
+        "<br><b>Driver :</b> " + bus.driverName +
+        "<br><b>Status :</b> " + bus.availabilityStatus +
+        "<br><b>Route :</b> " + bus.routeName +
+       
+        "<br><b>Latitude :</b> " + bus.latitude +
+        "<br><b>Longitude :</b> " + bus.longitude
+        );
+
+        });
+
+        });
+        
+
+    </script>
+
+}

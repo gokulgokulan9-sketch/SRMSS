@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SRMSS.Models.Activity>
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<h2>Notifications</h2>
+
+<form asp-action="ClearAll" method="post" class="mb-3">
+
+    <button class="btn btn-danger"
+            onclick="return confirm('Clear all notifications?')">
+
+        <i class="fas fa-trash"></i>
+
+        Clear All Notifications
+
+    </button>
+
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date & Time</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.IsRead ? "" : "table-warning")">
+
+                <td>@item.Message</td>
+
+                <td>
+                    @if (item.IsRead)
+                    {
+                        <span class="badge bg-success">Read</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Unread</span>
+                    }
+                </td>
+
+                <td>@item.ActivityDate.ToString("dd MMM yyyy hh:mm tt")</td>
+
+                <td>
+                    @if (!item.IsRead)
+                    {
+                        <form asp-action="MarkAsRead" method="post">
+                            <input type="hidden" name="id" value="@item.ActivityID" />
+
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                Mark as Read
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="text-success">
+                            ✔ Done
+                        </span>
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
